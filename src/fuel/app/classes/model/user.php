@@ -45,33 +45,4 @@ class Model_User extends \Orm\Model
             'mysql_timestamp' => false,
         ),
     );
-    
-    public function get_role_name()
-    {
-        switch($this->group_id) {
-            case 1: return 'Normal';
-            case 2: return 'Author';
-            case 3: return 'Admin';
-        }
-    }
-    
-    public function is_admin()
-    {
-        return $this->group == 3;
-    }
-    
-    public function is_author()
-    {
-        return $this->group >= 2;
-    }
-    
-    public function can_manage_users()
-    {
-        return $this->is_admin();
-    }
-    
-    public function can_manage_posts()
-    {
-        return $this->is_author();
-    }
 } 

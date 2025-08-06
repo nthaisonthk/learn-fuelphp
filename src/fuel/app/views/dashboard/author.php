@@ -13,12 +13,11 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-header bg-success text-white">
-                <h5><i class="fas fa-plus"></i> Tạo bài viết mới</h5>
+                <h5><i class="fas fa-plus"></i> Create new post</h5>
             </div>
             <div class="card-body">
-                <p>Tạo bài viết mới để chia sẻ với cộng đồng.</p>
                 <a href="<?php echo Uri::base(); ?>author/post_create" class="btn btn-success">
-                    <i class="fas fa-plus"></i> Tạo bài viết
+                    <i class="fas fa-plus"></i> New post
                 </a>
             </div>
         </div>
@@ -26,12 +25,11 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-header bg-primary text-white">
-                <h5><i class="fas fa-list"></i> Quản lý bài viết</h5>
+                <h5><i class="fas fa-list"></i> Posts management</h5>
             </div>
             <div class="card-body">
-                <p>Xem và chỉnh sửa tất cả bài viết của bạn.</p>
                 <a href="<?php echo Uri::base(); ?>author/posts" class="btn btn-primary">
-                    <i class="fas fa-list"></i> Xem bài viết
+                    <i class="fas fa-list"></i> View post
                 </a>
             </div>
         </div>
@@ -43,13 +41,13 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h5><i class="fas fa-file-alt"></i> Bài viết gần đây</h5>
+                <h5><i class="fas fa-file-alt"></i> Recent Posts</h5>
             </div>
             <div class="card-body">
                 <?php if (empty($posts)): ?>
                     <div class="alert alert-info text-center">
-                        <i class="fas fa-info-circle"></i> Bạn chưa có bài viết nào. 
-                        <a href="<?php echo Uri::base(); ?>author/post_create" class="btn btn-primary btn-sm ms-2">Tạo bài viết đầu tiên</a>
+                        <i class="fas fa-info-circle"></i> You have no posts yet.
+                        <a href="<?php echo Uri::base(); ?>author/post_create" class="btn btn-primary btn-sm ms-2">Create first post</a>
                     </div>
                 <?php else: ?>
                     <div class="table-responsive">
@@ -69,7 +67,7 @@
                                             <strong><?php echo $post->title; ?></strong>
                                             <?php if ($post->is_published()): ?>
                                                 <a href="<?php echo Uri::base(); ?>blog/view/<?php echo $post->id; ?>" class="btn btn-sm btn-outline-primary ms-2">
-                                                    <i class="fas fa-eye"></i> Xem
+                                                    <i class="fas fa-eye"></i> View
                                                 </a>
                                             <?php endif; ?>
                                         </td>

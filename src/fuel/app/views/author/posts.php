@@ -3,9 +3,9 @@
 <div class="row">
     <div class="col-12">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1><i class="fas fa-file-alt"></i> Quản lý bài viết</h1>
+            <h4><i class="fas fa-file-alt"></i> Post management</h4>
             <a href="<?php echo Uri::base(); ?>author/post_create" class="btn btn-success">
-                <i class="fas fa-plus"></i> Tạo bài viết mới
+                <i class="fas fa-plus"></i> Create new post
             </a>
         </div>
     </div>
@@ -15,12 +15,12 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h5><i class="fas fa-list"></i> Danh sách bài viết của bạn</h5>
+                <h5><i class="fas fa-list"></i> List of your posts</h5>
             </div>
             <div class="card-body">
                 <?php if (empty($posts)): ?>
                     <div class="alert alert-info text-center">
-                        <i class="fas fa-info-circle"></i> Bạn chưa có bài viết nào. 
+                        <i class="fas fa-info-circle"></i> Empty post.
                         <a href="<?php echo Uri::base(); ?>author/post_create" class="btn btn-primary btn-sm ms-2">Tạo bài viết đầu tiên</a>
                     </div>
                 <?php else: ?>
@@ -28,11 +28,11 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Tiêu đề</th>
-                                    <th>Trạng thái</th>
-                                    <th>Ngày tạo</th>
-                                    <th>Bình luận</th>
-                                    <th>Thao tác</th>
+                                    <th>Title</th>
+                                    <th>Status</th>
+                                    <th>Created at</th>
+                                    <th>Comments</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,15 +42,15 @@
                                             <strong><?php echo $post->title; ?></strong>
                                             <?php if ($post->is_published()): ?>
                                                 <a href="<?php echo Uri::base(); ?>blog/view/<?php echo $post->id; ?>" class="btn btn-sm btn-outline-primary ms-2">
-                                                    <i class="fas fa-eye"></i> Xem
+                                                    <i class="fas fa-eye"></i> View
                                                 </a>
                                             <?php endif; ?>
                                         </td>
                                         <td>
                                             <?php if ($post->is_published()): ?>
-                                                <span class="badge bg-success">Đã xuất bản</span>
+                                                <span class="badge bg-success">Published</span>
                                             <?php else: ?>
-                                                <span class="badge bg-warning">Bản nháp</span>
+                                                <span class="badge bg-warning">Draft</span>
                                             <?php endif; ?>
                                         </td>
                                         <td><?php echo date('d/m/Y H:i', $post->created_at); ?></td>
@@ -61,10 +61,10 @@
                                         </td>
                                         <td>
                                             <a href="<?php echo Uri::base(); ?>author/post_edit/<?php echo $post->id; ?>" class="btn btn-sm btn-outline-primary">
-                                                <i class="fas fa-edit"></i> Sửa
+                                                <i class="fas fa-edit"></i> Edit
                                             </a>
                                             <a href="<?php echo Uri::base(); ?>author/post_delete/<?php echo $post->id; ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Bạn có chắc muốn xóa bài viết này?')">
-                                                <i class="fas fa-trash"></i> Xóa
+                                                <i class="fas fa-trash"></i> Delete
                                             </a>
                                         </td>
                                     </tr>

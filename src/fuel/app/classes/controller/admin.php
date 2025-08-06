@@ -9,8 +9,8 @@ class Controller_Admin extends Controller
         }
         
         $user = Auth::get_user();
-        if ($user->group_id != 3) {
-            Session::set_flash('error', 'Bạn không có quyền truy cập trang này!');
+        if ($user->group_id != 6) {
+            Session::set_flash('error', 'You do not have permission to access this page!');
             Response::redirect('dashboard');
         }
     }
@@ -18,11 +18,11 @@ class Controller_Admin extends Controller
     // User Management
     public function action_users()
     {
-        $users = Model_User::query()->order_by('created_at', 'DESC')->get();
+        $users = Model_User::query()->order_by('created_at', 'ASC')->get();
         
         $view = View::forge('admin/users');
         $view->set('users', $users);
-        $view->set_global('title', 'Quản lý người dùng');
+        $view->set_global('title', 'User management');
         return Response::forge(View::forge('template')->set('content', $view, false));
     }
     
@@ -40,19 +40,18 @@ class Controller_Admin extends Controller
         if (Input::method() == 'POST') {
             $user->username = Input::post('username');
             $user->email = Input::post('email');
-            $user->group = Input::post('group');
-            
+            $user->group_id = Input::post('group');
             if ($user->save()) {
-                Session::set_flash('success', 'Cập nhật người dùng thành công!');
+                Session::set_flash('success', 'Updated successfully!');
                 Response::redirect('admin/users');
             } else {
-                Session::set_flash('error', 'Có lỗi xảy ra khi cập nhật!');
+                Session::set_flash('error', 'An error occurred!');
             }
         }
         
         $view = View::forge('admin/user_edit');
         $view->set('user', $user);
-        $view->set_global('title', 'Chỉnh sửa người dùng');
+        $view->set_global('title', 'Edit user');
         return Response::forge(View::forge('template')->set('content', $view, false));
     }
     
@@ -65,7 +64,7 @@ class Controller_Admin extends Controller
         $user = Model_User::query()->where('id', $id)->get_one();
         if ($user && $user->id != Auth::get_user_id()) {
             $user->delete();
-            Session::set_flash('success', 'Xóa người dùng thành công!');
+            Session::set_flash('success', 'Deleted successfully!');
         }
         
         Response::redirect('admin/users');
@@ -81,7 +80,8 @@ class Controller_Admin extends Controller
         
         $view = View::forge('admin/posts');
         $view->set('posts', $posts);
-        $view->set_global('title', 'Quản lý bài viết');
+        $view->set_global('title', 'Posts Management');
+
         return Response::forge(View::forge('template')->set('content', $view, false));
     }
     
@@ -104,16 +104,16 @@ class Controller_Admin extends Controller
             $post->slug = $this->create_slug(Input::post('title'));
             
             if ($post->save()) {
-                Session::set_flash('success', 'Cập nhật bài viết thành công!');
+                Session::set_flash('success', 'Updated Successfully!');
                 Response::redirect('admin/posts');
             } else {
-                Session::set_flash('error', 'Có lỗi xảy ra khi cập nhật!');
+                Session::set_flash('error', 'An error occurred!');
             }
         }
         
         $view = View::forge('admin/post_edit');
         $view->set('post', $post);
-        $view->set_global('title', 'Chỉnh sửa bài viết');
+        $view->set_global('title', 'Edit post');
         return Response::forge(View::forge('template')->set('content', $view, false));
     }
     
@@ -126,7 +126,7 @@ class Controller_Admin extends Controller
         $post = Model_Post::query()->where('id', $id)->get_one();
         if ($post) {
             $post->delete();
-            Session::set_flash('success', 'Xóa bài viết thành công!');
+            Session::set_flash('success', 'Deleted successfully');
         }
         
         Response::redirect('admin/posts');
@@ -143,7 +143,7 @@ class Controller_Admin extends Controller
         
         $view = View::forge('admin/comments');
         $view->set('comments', $comments);
-        $view->set_global('title', 'Quản lý bình luận');
+        $view->set_global('title', 'Comments Management');
         return Response::forge(View::forge('template')->set('content', $view, false));
     }
     
@@ -157,7 +157,7 @@ class Controller_Admin extends Controller
         if ($comment) {
             $comment->status = 'approved';
             $comment->save();
-            Session::set_flash('success', 'Duyệt bình luận thành công!');
+            Session::set_flash('success', 'Approved comment!');
         }
         
         Response::redirect('admin/comments');
@@ -173,7 +173,7 @@ class Controller_Admin extends Controller
         if ($comment) {
             $comment->status = 'spam';
             $comment->save();
-            Session::set_flash('success', 'Từ chối bình luận thành công!');
+            Session::set_flash('success', 'Rejected this comment!');
         }
         
         Response::redirect('admin/comments');

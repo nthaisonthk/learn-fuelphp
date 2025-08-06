@@ -13,15 +13,15 @@ class Controller_Auth extends Controller
             $password = Input::post('password');
             
             if (Auth::login($username, $password)) {
-                Session::set_flash('success', 'Đăng nhập thành công!');
+                Session::set_flash('success');
                 Response::redirect('dashboard');
             } else {
-                Session::set_flash('error', 'Tên đăng nhập hoặc mật khẩu không đúng!');
+                Session::set_flash('error', 'Username or password incorrect');
             }
         }
 
         $view = View::forge('auth/login');
-        $view->set_global('title', 'Đăng nhập');
+        $view->set_global('title', 'Login');
         return Response::forge(View::forge('template')->set('content', $view, false));
     }
     
@@ -48,16 +48,16 @@ class Controller_Auth extends Controller
                 // Check if username exists
                 $existing_user = Model_User::query()->where('username', $username)->get_one();
                 if ($existing_user) {
-                    Session::set_flash('error', 'Tên đăng nhập đã tồn tại!');
+                    Session::set_flash('error', 'Username exist!');
                     $view = View::forge('auth/register');
-                    $view->set_global('title', 'Đăng ký');
+                    $view->set_global('title', 'Register');
                     return Response::forge(View::forge('template')->set('content', $view, false));
                 }
                 
                 // Check if email exists
                 $existing_email = Model_User::query()->where('email', $email)->get_one();
                 if ($existing_email) {
-                    Session::set_flash('error', 'Email đã tồn tại!');
+                    Session::set_flash('error', 'Email exist!');
                     $view = View::forge('auth/register');
                     $view->set_global('title', 'Đăng ký');
                     return Response::forge(View::forge('template')->set('content', $view, false));
@@ -65,15 +65,15 @@ class Controller_Auth extends Controller
                 
                 // Create user using Auth
                 try {
-                    $created = Auth::create_user($username, $password, $email, 1);
+                    $created = Auth::create_user($username, $password, $email, 3); //default group: normal user
                     if ($created) {
-                        Session::set_flash('success', 'Đăng ký thành công! Vui lòng đăng nhập.');
+                        Session::set_flash('success', 'Success! Please login.');
                         Response::redirect('auth/login');
                     } else {
-                        Session::set_flash('error', 'Có lỗi xảy ra khi đăng ký!');
+                        Session::set_flash('error', 'An error occurred!');
                     }
                 } catch (Exception $e) {
-                    Session::set_flash('error', 'Có lỗi xảy ra: ' . $e->getMessage());
+                    Session::set_flash('error', 'An error occurred: ' . $e->getMessage());
                 }
             } else {
                 Session::set_flash('error', $val->error());
@@ -81,14 +81,14 @@ class Controller_Auth extends Controller
         }
         
         $view = View::forge('auth/register');
-        $view->set_global('title', 'Đăng ký');
+        $view->set_global('title', 'Register');
         return Response::forge(View::forge('template')->set('content', $view, false));
     }
     
     public function action_logout()
     {
         Auth::logout();
-        Session::set_flash('success', 'Đã đăng xuất thành công!');
+        Session::set_flash('success', 'Logout!');
         Response::redirect('/');
     }
 } 

@@ -1,9 +1,9 @@
-<?php $title = 'Quản lý bình luận'; ?>
+<?php $title = 'Comments management'; ?>
 
 <div class="row">
     <div class="col-12">
         <h1 class="mb-4">
-            <i class="fas fa-comments"></i> Quản lý bình luận
+            <i class="fas fa-comments"></i> Comments management
         </h1>
     </div>
 </div>

@@ -13,7 +13,11 @@ class Controller_Dashboard extends Controller
     public function action_index()
     {
         $user = Auth::get_user();
-        if ($user->group_id == 3) {
+        $group_id = $user->group_id;
+        $group = Model_UserGroup::find($group_id);
+        $group_name = $group ? $group->name : 'Unknown';
+
+        if ($group_id == 6) {
             // Admin dashboard
             $total_users = Model_User::query()->count();
             $total_posts = Model_Post::query()->count();
@@ -26,8 +30,9 @@ class Controller_Dashboard extends Controller
             $view->set('total_posts', $total_posts);
             $view->set('total_comments', $total_comments);
             $view->set('pending_comments', $pending_comments);
+            $view->set('role', $group_name);
             $view->set_global('title', 'Admin Dashboard');
-        } elseif ($user->group_id >= 2) {
+        } elseif ($group_id >= 2) {
             // Author dashboard
             $posts = Model_Post::query()
                 ->where('user_id', $user->id)
@@ -37,6 +42,7 @@ class Controller_Dashboard extends Controller
             $view = View::forge('dashboard/author');
             $view->set('user', $user);
             $view->set('posts', $posts);
+            $view->set('role', $group_name);
             $view->set_global('title', 'Author Dashboard');
         } else {
             // Normal user dashboard
@@ -48,6 +54,7 @@ class Controller_Dashboard extends Controller
             $view = View::forge('dashboard/user');
             $view->set('user', $user);
             $view->set('comments', $comments);
+            $view->set('role', $group_name);
             $view->set_global('title', 'User Dashboard');
         }
 

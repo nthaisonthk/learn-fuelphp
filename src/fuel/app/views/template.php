@@ -34,15 +34,15 @@
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo Uri::base(); ?>dashboard">Dashboard</a>
                         </li>
-                        <?php if (Auth::get_user()->group_id >= 2): ?>
+                        <?php if (Auth::get_user()->group_id == 4): ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo Uri::base(); ?>author/posts">Posts Manage</a>
                             </li>
                         <?php endif; ?>
-                        <?php if (Auth::get_user()->group_id == 3): ?>
+                        <?php if (Auth::get_user()->group_id == 6): ?>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown">
-                                    Quản trị
+                                    Management
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="<?php echo Uri::base(); ?>admin/users">User Management</a></li>
