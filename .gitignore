@@ -1,0 +1,44 @@
+# FuelPHP specific
+src/fuel/app/cache/*
+src/fuel/app/logs/*
+src/fuel/app/tmp/*
+src/fuel/app/config/development/db.php
+src/fuel/app/config/development/auth.php
+src/fuel/app/config/production/db.php
+src/fuel/app/config/production/auth.php
+
+# Composer
+src/composer.lock
+src/vendor/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Database files
+*.sql
+*.sqlite
+
+# Temporary files
+tmp/
+temp/ 
