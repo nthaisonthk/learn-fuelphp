@@ -9,8 +9,8 @@ class Controller_Author extends Controller
         }
         
         $user = Auth::get_user();
-        if ($user->group_id < 2) {
-            Session::set_flash('error', 'Bạn không có quyền truy cập trang này!');
+        if ($user->group_id != 4) {
+            Session::set_flash('error', 'You do not have permission to access this page!');
             Response::redirect('dashboard');
         }
     }
@@ -51,7 +51,7 @@ class Controller_Author extends Controller
         }
         
         $view = View::forge('author/post_create');
-        $view->set_global('title', 'Tạo bài viết mới');
+        $view->set_global('title', 'New post');
         return Response::forge(View::forge('template')->set('content', $view, false));
     }
     
@@ -60,10 +60,11 @@ class Controller_Author extends Controller
         if (!$id) {
             Response::redirect('author/posts');
         }
-        
+
+        $user = Auth::get_user();
         $post = Model_Post::query()
             ->where('id', $id)
-            ->where('user_id', Auth::get_user_id())
+            ->where('user_id', $user->id)
             ->get_one();
         
         if (!$post) {
@@ -78,7 +79,7 @@ class Controller_Author extends Controller
             $post->slug = $this->create_slug(Input::post('title'));
             
             if ($post->save()) {
-                Session::set_flash('success', 'Cập nhật bài viết thành công!');
+                Session::set_flash('success', 'Updated post successfully!');
                 Response::redirect('author/posts');
             } else {
                 Session::set_flash('error', 'An error occurred!');
@@ -87,7 +88,7 @@ class Controller_Author extends Controller
         
         $view = View::forge('author/post_edit');
         $view->set('post', $post);
-        $view->set_global('title', 'Chỉnh sửa bài viết');
+        $view->set_global('title', 'Edit post');
         return Response::forge(View::forge('template')->set('content', $view, false));
     }
     
