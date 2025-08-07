@@ -2,9 +2,9 @@
 
 <div class="row">
     <div class="col-12">
-        <h1 class="mb-4">
+        <h4 class="mb-4">
             <i class="fas fa-comments"></i> Comments management
-        </h1>
+        </h4>
     </div>
 </div>
 
@@ -12,12 +12,12 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h5><i class="fas fa-list"></i> Danh sách tất cả bình luận</h5>
+                <h5><i class="fas fa-list"></i> List of comments</h5>
             </div>
             <div class="card-body">
                 <?php if (empty($comments)): ?>
                     <div class="alert alert-info text-center">
-                        <i class="fas fa-info-circle"></i> Chưa có bình luận nào trong hệ thống.
+                        <i class="fas fa-info-circle"></i> There are no comments in the system yet.
                     </div>
                 <?php else: ?>
                     <div class="table-responsive">
@@ -25,12 +25,12 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Nội dung</th>
-                                    <th>Người viết</th>
-                                    <th>Bài viết</th>
-                                    <th>Trạng thái</th>
-                                    <th>Ngày viết</th>
-                                    <th>Thao tác</th>
+                                    <th>Content</th>
+                                    <th>Writer</th>
+                                    <th>Post</th>
+                                    <th>Status</th>
+                                    <th>Created at</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -53,24 +53,24 @@
                                         </td>
                                         <td>
                                             <?php if ($comment->is_approved()): ?>
-                                                <span class="badge bg-success">Đã duyệt</span>
+                                                <span class="badge bg-success">Approved</span>
                                             <?php elseif ($comment->is_pending()): ?>
-                                                <span class="badge bg-warning">Chờ duyệt</span>
+                                                <span class="badge bg-warning">Pending</span>
                                             <?php else: ?>
-                                                <span class="badge bg-danger">Bị từ chối</span>
+                                                <span class="badge bg-danger">Rejected</span>
                                             <?php endif; ?>
                                         </td>
                                         <td><?php echo date('d/m/Y H:i', $comment->created_at); ?></td>
                                         <td>
                                             <?php if ($comment->is_pending()): ?>
                                                 <a href="<?php echo Uri::base(); ?>admin/comment_approve/<?php echo $comment->id; ?>" class="btn btn-sm btn-outline-success">
-                                                    <i class="fas fa-check"></i> Duyệt
+                                                    <i class="fas fa-check"></i> Approve
                                                 </a>
                                                 <a href="<?php echo Uri::base(); ?>admin/comment_reject/<?php echo $comment->id; ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Bạn có chắc muốn từ chối bình luận này?')">
-                                                    <i class="fas fa-times"></i> Từ chối
+                                                    <i class="fas fa-times"></i> Reject
                                                 </a>
                                             <?php else: ?>
-                                                <span class="text-muted">Đã xử lý</span>
+                                                <span class="text-muted">Done</span>
                                             <?php endif; ?>
                                         </td>
                                     </tr>

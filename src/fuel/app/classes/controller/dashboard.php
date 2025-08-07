@@ -17,7 +17,7 @@ class Controller_Dashboard extends Controller
         $group = Model_UserGroup::find($group_id);
         $group_name = $group ? $group->name : 'Unknown';
 
-        if ($group_id == 6) {
+        if ($group_id == ROLE_ADMIN) {
             // Admin dashboard
             $total_users = Model_User::query()->count();
             $total_posts = Model_Post::query()->count();
@@ -32,7 +32,7 @@ class Controller_Dashboard extends Controller
             $view->set('pending_comments', $pending_comments);
             $view->set('role', $group_name);
             $view->set_global('title', 'Admin Dashboard');
-        } elseif ($group_id >= 2) {
+        } elseif ($group_id == ROLE_AUTHOR) {
             // Author dashboard
             $posts = Model_Post::query()
                 ->where('user_id', $user->id)
@@ -51,9 +51,18 @@ class Controller_Dashboard extends Controller
                 ->order_by('created_at', 'DESC')
                 ->limit(10)
                 ->get();
+            $approved_comments = Model_Comment::query()
+                ->where('user_id', $user->id)
+                ->where('status', 'approved')
+                ->order_by('created_at', 'DESC')
+                ->limit(10)
+                ->get();
+            $rejected_comments = count($comments) - count($approved_comments);
             $view = View::forge('dashboard/user');
             $view->set('user', $user);
             $view->set('comments', $comments);
+            $view->set('approved_comments', $approved_comments);
+            $view->set('rejected_comments', $rejected_comments);
             $view->set('role', $group_name);
             $view->set_global('title', 'User Dashboard');
         }

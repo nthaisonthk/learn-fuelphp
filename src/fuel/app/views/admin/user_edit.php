@@ -29,9 +29,9 @@
                     <div class="mb-3">
                         <label for="group" class="form-label">Role</label>
                         <select class="form-select" id="group" name="group">
-                            <option value="3" <?php echo $user->group_id == 3 ? 'selected' : ''; ?>>Normal</option>
-                            <option value="4" <?php echo $user->group_id == 4 ? 'selected' : ''; ?>>Author</option>
-                            <option value="6" <?php echo $user->group_id == 6 ? 'selected' : ''; ?>>Admin</option>
+                            <option value="3" <?php echo $user->group_id == ROLE_USER ? 'selected' : ''; ?>>Normal</option>
+                            <option value="4" <?php echo $user->group_id == ROLE_AUTHOR ? 'selected' : ''; ?>>Author</option>
+                            <option value="6" <?php echo $user->group_id == ROLE_ADMIN ? 'selected' : ''; ?>>Admin</option>
                         </select>
                     </div>
                     

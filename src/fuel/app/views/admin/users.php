@@ -50,9 +50,9 @@
                                             $group_name = $group ? $group->name : 'Unknown';
                                             $roleClass = 'bg-primary'; //default
                                             switch($group_id) {
-                                                case 3: $roleClass = 'bg-secondary'; break; //normal user
-                                                case 4: $roleClass = 'bg-info'; break; //  author
-                                                case 6: $roleClass = 'bg-danger'; break; // super admin
+                                                case ROLE_USER: $roleClass = 'bg-secondary'; break; //normal user
+                                                case ROLE_AUTHOR: $roleClass = 'bg-info'; break; //  author
+                                                case ROLE_ADMIN: $roleClass = 'bg-danger'; break; // super admin
                                             }
                                             ?>
                                             <span class="badge <?php echo $roleClass; ?>">
