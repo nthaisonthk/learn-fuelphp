@@ -39,15 +39,7 @@
                                     </div>
                                 <?php endif; ?>
                             </div>
-                            <input type="file" class="form-control" id="featured_image" name="featured_image" 
-                                   accept="image/*" style="display: none;">
-                            <div class="thumbnail-upload-info">
-                                <small class="text-muted">
-                                    <i class="fas fa-info-circle"></i> 
-                                    Recommended size: 800x400px. Max file size: 2MB. 
-                                    Supported formats: JPG, PNG, GIF
-                                </small>
-                            </div>
+                            <input type="file" class="form-control" id="featured_image" name="featured_image" accept="image/*">
                         </div>
                     </div>
                     
