@@ -9,7 +9,7 @@ class Controller_Admin extends Controller
         }
         
         $user = Auth::get_user();
-        if ($user->group_id != 6) {
+        if ($user->group_id != ROLE_ADMIN) {
             Session::set_flash('error', 'You do not have permission to access this page!');
             Response::redirect('dashboard');
         }

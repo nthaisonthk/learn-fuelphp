@@ -11,7 +11,7 @@ class Controller_Blog extends Controller
         
         $view = View::forge('blog/index');
         $view->set('posts', $posts);
-        $view->set_global('title', 'Trang chủ - Blog System');
+        $view->set_global('title', 'Blog - Home page');
         return Response::forge(View::forge('template')->set('content', $view, false));
     }
     
@@ -35,14 +35,14 @@ class Controller_Blog extends Controller
         $view = View::forge('blog/view');
         $view->set('post', $post);
         $view->set('comments', $comments);
-        $view->set_global('title', $post->title . ' - Blog System');
+        $view->set_global('title', $post->title . ' - Blog');
         return Response::forge(View::forge('template')->set('content', $view, false));
     }
     
     public function action_comment($post_id = null)
     {
         if (!Auth::check()) {
-            Session::set_flash('error', 'Bạn cần đăng nhập để bình luận!');
+            Session::set_flash('error', 'Must login to comment!');
             Response::redirect('auth/login');
         }
         
@@ -63,21 +63,22 @@ class Controller_Blog extends Controller
         $parent_id = Input::post('parent_id', null);
         
         if (empty($content)) {
-            Session::set_flash('error', 'Nội dung bình luận không được để trống!');
+            Session::set_flash('error', 'Comment content cannot be blank!');
             Response::redirect('blog/view/' . $post_id);
         }
-        
+
+        $user = Auth::get_user();
         $comment = Model_Comment::forge();
         $comment->content = $content;
         $comment->post_id = $post_id;
-        $comment->user_id = Auth::get_user_id();
+        $comment->user_id = $user->id;
         $comment->parent_id = $parent_id;
         $comment->status = 'pending'; // Default to pending for moderation
         
         if ($comment->save()) {
-            Session::set_flash('success', 'Bình luận đã được gửi và đang chờ duyệt!');
+            Session::set_flash('success', 'Comment successfully');
         } else {
-            Session::set_flash('error', 'Có lỗi xảy ra khi gửi bình luận!');
+            Session::set_flash('error', 'Comment cant not be send');
         }
         
         Response::redirect('blog/view/' . $post_id);

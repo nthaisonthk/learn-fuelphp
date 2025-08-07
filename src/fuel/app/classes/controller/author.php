@@ -9,7 +9,7 @@ class Controller_Author extends Controller
         }
         
         $user = Auth::get_user();
-        if ($user->group_id != 4) {
+        if ($user->group_id != ROLE_AUTHOR) {
             Session::set_flash('error', 'You do not have permission to access this page!');
             Response::redirect('dashboard');
         }

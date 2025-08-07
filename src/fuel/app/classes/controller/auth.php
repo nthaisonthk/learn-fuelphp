@@ -65,7 +65,7 @@ class Controller_Auth extends Controller
                 
                 // Create user using Auth
                 try {
-                    $created = Auth::create_user($username, $password, $email, 3); //default group: normal user
+                    $created = Auth::create_user($username, $password, $email, ROLE_USER); //default group: normal user
                     if ($created) {
                         Session::set_flash('success', 'Success! Please login.');
                         Response::redirect('auth/login');
