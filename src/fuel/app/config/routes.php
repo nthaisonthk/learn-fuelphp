@@ -69,4 +69,8 @@ return array(
     'admin/comments' => 'admin/comments',
     'admin/comment_approve/(:id)' => 'admin/comment_approve/$1',
     'admin/comment_reject/(:id)' => 'admin/comment_reject/$1',
+    
+    // API routes
+    'api/user' => 'api/user/index',
+    'api/user/(:id)' => 'api/user/view/$1',
 );

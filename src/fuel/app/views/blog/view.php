@@ -9,7 +9,11 @@
                     <i class="fas fa-comments"></i> <?php echo count($comments); ?> comments
                 </div>
                 <?php if ($post->featured_image): ?>
-                    <img src="<?php echo $post->featured_image; ?>" class="img-fluid rounded mb-4" alt="<?php echo $post->title; ?>">
+                    <div class="post-featured-image">
+                        <img src="<?php echo Uri::base() . 'assets/uploads/' . $post->featured_image; ?>" 
+                             class="img-fluid rounded" 
+                             alt="<?php echo $post->title; ?>">
+                    </div>
                 <?php endif; ?>
             </header>
             
@@ -74,3 +78,63 @@
         </div>
     </div>
 </div>
+
+<style>
+.post-featured-image {
+    margin-bottom: 2rem;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.post-featured-image img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.post-featured-image:hover img {
+    transform: scale(1.02);
+}
+
+.blog-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #2c3e50;
+}
+
+.blog-content p {
+    margin-bottom: 1.5rem;
+}
+
+.blog-content h2, .blog-content h3, .blog-content h4 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #34495e;
+}
+
+.comment-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.comment-item {
+    padding: 1rem 0;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.comment-item:last-child {
+    border-bottom: none;
+}
+
+@media (max-width: 768px) {
+    .post-featured-image {
+        margin-bottom: 1.5rem;
+    }
+    
+    .blog-content {
+        font-size: 1rem;
+    }
+}
+</style>

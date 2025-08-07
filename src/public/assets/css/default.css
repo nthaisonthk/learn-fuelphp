@@ -1,0 +1,249 @@
+html {
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+body {
+    margin: 0;
+}
+
+.thumbnail-upload-container {
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.thumbnail-upload-container:hover {
+    border-color: #007bff;
+    background-color: #f0f8ff;
+}
+
+.thumbnail-preview {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    background-color: #fff;
+    border: 1px solid #e9ecef;
+    position: relative;
+}
+
+.thumbnail-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #6c757d;
+}
+
+.thumbnail-placeholder i {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    color: #dee2e6;
+}
+
+.thumbnail-placeholder span {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.thumbnail-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.thumbnail-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.thumbnail-preview:hover .thumbnail-overlay {
+    opacity: 1;
+}
+
+.thumbnail-overlay i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.thumbnail-overlay span {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.thumbnail-upload-info {
+    margin-top: 10px;
+}
+
+.thumbnail-upload-info small {
+    font-size: 0.85rem;
+}
+
+.post-featured-image {
+    margin-bottom: 2rem;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.post-featured-image img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.post-featured-image:hover img {
+    transform: scale(1.02);
+}
+
+.blog-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #2c3e50;
+}
+
+.blog-content p {
+    margin-bottom: 1.5rem;
+}
+
+.blog-content h2, .blog-content h3, .blog-content h4 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #34495e;
+}
+
+.comment-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.comment-item {
+    padding: 1rem 0;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.comment-item:last-child {
+    border-bottom: none;
+}
+
+@media (max-width: 768px) {
+    .post-featured-image {
+        margin-bottom: 1.5rem;
+    }
+
+    .blog-content {
+        font-size: 1rem;
+    }
+}
+
+.post-card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: 1px solid #e9ecef;
+    overflow: hidden;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.post-thumbnail {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    background-color: #f8f9fa;
+}
+
+.post-thumbnail-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.post-card:hover .post-thumbnail-img {
+    transform: scale(1.05);
+}
+
+.post-thumbnail-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #6c757d;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.post-thumbnail-placeholder i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.post-thumbnail-placeholder span {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.post-status-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.post-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+.post-meta {
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+}
+
+.post-excerpt {
+    color: #6c757d;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+@media (max-width: 768px) {
+    .post-thumbnail {
+        height: 180px;
+    }
+
+    .post-title {
+        font-size: 1rem;
+    }
+}

@@ -9,6 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/trumbowyg@2.25.1/dist/ui/trumbowyg.min.css">
 
+    <link rel="stylesheet" href="<?php Uri::base() ?>assets/css/default.css">
     <style>
         .navbar-brand { font-weight: bold; }
         .footer { margin-top: 50px; padding: 20px 0; background-color: #f8f9fa; }
@@ -18,6 +19,12 @@
         .comment-item { border-left: 3px solid #007bff; padding-left: 15px; margin-bottom: 15px; }
         .admin-stats { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/trumbowyg@2.25.1/dist/trumbowyg.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#content').trumbowyg();
+        });
+    </script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -37,12 +44,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo Uri::base(); ?>dashboard">Dashboard</a>
                         </li>
-                        <?php if (Auth::get_user()->group_id == 4): ?>
+                        <?php if (Auth::get_user()->group_id == ROLE_AUTHOR): ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo Uri::base(); ?>author/posts">Posts Manage</a>
                             </li>
                         <?php endif; ?>
-                        <?php if (Auth::get_user()->group_id == 6): ?>
+                        <?php if (Auth::get_user()->group_id == ROLE_ADMIN): ?>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown">
                                     Management
@@ -100,5 +107,6 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="<?php Uri::base() ?>assets/js/post.js ?>"></script>
 </body>
 </html>

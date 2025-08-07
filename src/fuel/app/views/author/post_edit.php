@@ -15,10 +15,40 @@
                 <h5><i class="fas fa-edit"></i> Post information</h5>
             </div>
             <div class="card-body">
-                <form method="post" action="<?php echo Uri::base(); ?>author/post_edit/<?php echo $post->id; ?>">
+                <form method="post" action="<?php echo Uri::base(); ?>author/post_edit/<?php echo $post->id; ?>" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="title" class="form-label">Title *</label>
                         <input type="text" class="form-control" id="title" name="title" value="<?php echo $post->title; ?>" required>
+                    </div>
+                    
+                    <!-- Thumbnail Upload Section -->
+                    <div class="mb-3">
+                        <label for="featured_image" class="form-label">Thumbnail Image</label>
+                        <div class="thumbnail-upload-container">
+                            <div class="thumbnail-preview" id="thumbnailPreview">
+                                <?php if ($post->featured_image): ?>
+                                    <img src="<?php echo Uri::base() . 'assets/uploads/' . $post->featured_image; ?>" alt="Current thumbnail">
+                                    <div class="thumbnail-overlay">
+                                        <i class="fas fa-edit"></i>
+                                        <span>Click to change image</span>
+                                    </div>
+                                <?php else: ?>
+                                    <div class="thumbnail-placeholder">
+                                        <i class="fas fa-image"></i>
+                                        <span>Click to upload image</span>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                            <input type="file" class="form-control" id="featured_image" name="featured_image" 
+                                   accept="image/*" style="display: none;">
+                            <div class="thumbnail-upload-info">
+                                <small class="text-muted">
+                                    <i class="fas fa-info-circle"></i> 
+                                    Recommended size: 800x400px. Max file size: 2MB. 
+                                    Supported formats: JPG, PNG, GIF
+                                </small>
+                            </div>
+                        </div>
                     </div>
                     
                     <div class="mb-3">
@@ -52,32 +82,3 @@
         </div>
     </div>
 </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Auto-resize textarea
-    const contentTextarea = document.getElementById('content');
-    contentTextarea.addEventListener('input', function() {
-        this.style.height = 'auto';
-        this.style.height = this.scrollHeight + 'px';
-    });
-    
-    // Character counter for excerpt
-    const excerptTextarea = document.getElementById('excerpt');
-    excerptTextarea.addEventListener('input', function() {
-        const maxLength = 200;
-        const currentLength = this.value.length;
-        const remaining = maxLength - currentLength;
-        
-        if (remaining < 0) {
-            this.value = this.value.substring(0, maxLength);
-        }
-    });
-});
-</script>
-<script src="https://cdn.jsdelivr.net/npm/trumbowyg@2.25.1/dist/trumbowyg.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#content').trumbowyg();
-    });
-</script>
