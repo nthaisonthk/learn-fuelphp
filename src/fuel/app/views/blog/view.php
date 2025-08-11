@@ -49,32 +49,26 @@
                 </div>
             <?php endif; ?>
             
-            <?php if (empty($comments)): ?>
-                <div class="alert alert-light text-center">
-                    <i class="fas fa-comment-slash"></i> No comments yet. Be the first!
-                </div>
-            <?php else: ?>
-                <div class="comments-list">
-                    <?php foreach ($comments as $comment): ?>
-                        <div class="comment-item">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0">
-                                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                        <i class="fas fa-user text-white"></i>
-                                    </div>
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <div class="d-flex justify-content-between">
-                                        <h6 class="mb-1"><?php echo $comment->user->username; ?></h6>
-                                        <small class="text-muted"><?php echo date('d/m/Y H:i', $comment->created_at); ?></small>
-                                    </div>
-                                    <p class="mb-1"><?php echo nl2br($comment->content); ?></p>
+            <div class="comments-list">
+                <?php foreach ($comments as $comment): ?>
+                    <div class="comment-item">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0">
+                                <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                    <i class="fas fa-user text-white"></i>
                                 </div>
                             </div>
+                            <div class="flex-grow-1 ms-3">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="mb-1"><?php echo $comment->user->username; ?></h6>
+                                    <small class="text-muted"><?php echo date('d/m/Y H:i', $comment->created_at); ?></small>
+                                </div>
+                                <p class="mb-1"><?php echo nl2br($comment->content); ?></p>
+                            </div>
                         </div>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
     </div>
 </div>

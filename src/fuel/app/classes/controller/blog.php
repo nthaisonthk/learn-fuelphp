@@ -4,15 +4,67 @@ class Controller_Blog extends Controller
 {
     public function action_index()
     {
-        $posts = Model_Post::query()
-            ->where('status', 'published')
-            ->order_by('created_at', 'DESC')
-            ->get();
+        $search = Input::get('search', '');
+        
+        $query = Model_Post::query()
+            ->where('status', 'published');
+        
+        // Thêm điều kiện tìm kiếm nếu có
+        if (!empty($search)) {
+            $query->where('title', 'LIKE', '%' . $search . '%');
+        }
+        
+        $posts = $query->order_by('created_at', 'DESC')->get();
         
         $view = View::forge('blog/index');
         $view->set('posts', $posts);
+        $view->set('search', $search);
         $view->set_global('title', 'Blog - Home page');
         return Response::forge(View::forge('template')->set('content', $view, false));
+    }
+    
+    public function action_search()
+    {
+        // Chỉ xử lý AJAX request
+        if (!Input::is_ajax()) {
+            Response::redirect('blog');
+        }
+        
+        $search = Input::get('search', '');
+        $query = Model_Post::query()
+            ->where('status', 'published');
+        
+        if (!empty($search)) {
+            $query->where('title', 'LIKE', '%' . $search . '%');
+        }
+        
+        $posts = $query->order_by('created_at', 'DESC')->get();
+        
+        // Trả về JSON response
+        $response = array(
+            'success' => true,
+            'posts' => array(),
+            'total' => count($posts),
+            'search' => $search
+        );
+        
+        foreach ($posts as $post) {
+            $response['posts'][] = array(
+                'id' => $post->id,
+                'title' => $post->title,
+                'excerpt' => $post->get_excerpt(100),
+                'author' => $post->user->username,
+                'date' => date('d/m/Y', $post->created_at),
+                'comments_count' => count($post->comments),
+                'featured_image' => $post->featured_image,
+                'url' => Uri::base() . 'blog/view/' . $post->id,
+                'is_published' => $post->is_published()
+            );
+        }
+        
+        return Response::forge(json_encode($response), 200, array(
+            'Content-Type' => 'application/json'
+        ));
     }
     
     public function action_view($id = null)

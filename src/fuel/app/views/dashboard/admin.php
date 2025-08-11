@@ -1,5 +1,3 @@
-
-
 <div class="row">
     <div class="col-12">
         <h4 class="mb-4">
@@ -7,48 +5,6 @@
         </h4>
     </div>
 </div>
-
-<!-- Statistics Cards -->
-<!--
-<div class="row mb-4">
-    <div class="col-md-3">
-        <div class="card admin-stats">
-            <div class="card-body text-center">
-                <i class="fas fa-users fa-3x mb-3"></i>
-                <h3><?php echo $total_users; ?></h3>
-                <p class="mb-0">Total users</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card admin-stats">
-            <div class="card-body text-center">
-                <i class="fas fa-file-alt fa-3x mb-3"></i>
-                <h3><?php echo $total_posts; ?></h3>
-                <p class="mb-0">Tổng số posts</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card admin-stats">
-            <div class="card-body text-center">
-                <i class="fas fa-comments fa-3x mb-3"></i>
-                <h3><?php echo $total_comments; ?></h3>
-                <p class="mb-0">Total comments</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card bg-warning text-white">
-            <div class="card-body text-center">
-                <i class="fas fa-clock fa-3x mb-3"></i>
-                <h3><?php echo $pending_comments; ?></h3>
-                <p class="mb-0">Pending comments</p>
-            </div>
-        </div>
-    </div>
-</div>
--->
 
 <!-- Quick Actions -->
 <div class="row">

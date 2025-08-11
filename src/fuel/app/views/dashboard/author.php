@@ -54,10 +54,10 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Tiêu đề</th>
-                                    <th>Trạng thái</th>
-                                    <th>Ngày tạo</th>
-                                    <th>Thao tác</th>
+                                    <th>Title</th>
+                                    <th>Status</th>
+                                    <th>Created at</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -73,18 +73,18 @@
                                         </td>
                                         <td>
                                             <?php if ($post->is_published()): ?>
-                                                <span class="badge bg-success">Đã xuất bản</span>
+                                                <span class="badge bg-success">public</span>
                                             <?php else: ?>
-                                                <span class="badge bg-warning">Bản nháp</span>
+                                                <span class="badge bg-warning">draft</span>
                                             <?php endif; ?>
                                         </td>
                                         <td><?php echo date('d/m/Y H:i', $post->created_at); ?></td>
                                         <td>
                                             <a href="<?php echo Uri::base(); ?>author/post_edit/<?php echo $post->id; ?>" class="btn btn-sm btn-outline-primary">
-                                                <i class="fas fa-edit"></i> Sửa
+                                                <i class="fas fa-edit"></i> Edit
                                             </a>
                                             <a href="<?php echo Uri::base(); ?>author/post_delete/<?php echo $post->id; ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Bạn có chắc muốn xóa bài viết này?')">
-                                                <i class="fas fa-trash"></i> Xóa
+                                                <i class="fas fa-trash"></i> Delete
                                             </a>
                                         </td>
                                     </tr>

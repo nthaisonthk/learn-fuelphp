@@ -126,7 +126,7 @@ class Controller_Author extends Controller
             }
             
             $post->delete();
-            Session::set_flash('success', 'Xóa bài viết thành công!');
+            Session::set_flash('success', 'Deleted successfully!');
         }
         
         Response::redirect('author/posts');
