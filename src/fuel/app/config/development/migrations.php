@@ -5,6 +5,7 @@ return array (
       'default' => array(      
         0 => '002_create_posts_table',
         1 => '003_create_comments_table',
+        2 => '004_create_categories',
       ),
     ),
     'module' => array(    
